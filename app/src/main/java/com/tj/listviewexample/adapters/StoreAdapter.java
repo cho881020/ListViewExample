@@ -2,7 +2,10 @@ package com.tj.listviewexample.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.tj.listviewexample.R;
 import com.tj.listviewexample.datas.Store;
@@ -26,7 +29,33 @@ public class StoreAdapter extends ArrayAdapter<Store> {
     }
 
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
+        View row = convertView;
+
+        if (row == null) {
+
+            row = inf.inflate(R.layout.store_list_item, null);
+
+        }
+
+//        실제 Store데이터를 이용해서 row의 적재적소에 뿌려주기.
+
+        Store data = mList.get(position);
+
+//        XML에 그려진 컴포넌트들을 찾아서 JAVA로 연결.
+
+        TextView storeNameTxt = row.findViewById(R.id.storeNameTxt);
+
+
+//        data가 가진 값을 컴포넌트에 set.
+        storeNameTxt.setText(data.name);
+
+
+        return row;
+
+    }
 }
 
 
