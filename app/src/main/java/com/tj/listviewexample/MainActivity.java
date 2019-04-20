@@ -1,10 +1,12 @@
 package com.tj.listviewexample;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.tj.listviewexample.adapters.StoreAdapter;
+import com.tj.listviewexample.databinding.ActivityMainBinding;
 import com.tj.listviewexample.datas.Store;
 
 import java.util.ArrayList;
@@ -12,15 +14,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding act;
+
     List<Store> myStoreList = new ArrayList<>();
-    private android.widget.ListView storeListView;
 
     StoreAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        act = DataBindingUtil.setContentView(this, R.layout.activity_main);
         bindViews();
         setupEvents();
         setValues();
@@ -28,12 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
     void setValues() {
 
+        act.appNameTxt.setText("배달의민족");
 
 
         fillStores();
 
         myAdapter = new StoreAdapter(MainActivity.this, myStoreList);
-        storeListView.setAdapter(myAdapter);
+        act.storeListView.setAdapter(myAdapter);
 
     }
 
@@ -55,6 +59,5 @@ public class MainActivity extends AppCompatActivity {
 
     void bindViews() {
 
-        this.storeListView = (ListView) findViewById(R.id.storeListView);
     }
 }
